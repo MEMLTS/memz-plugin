@@ -31,11 +31,7 @@ git clone --depth=1 https://github.com/MEMLTS/memz-plugin.git ./plugins/memz-plu
 git clone --depth=1 https://ghfast.top/https://github.com/MEMLTS/memz-plugin.git ./plugins/memz-plugin/
 ```
 
-#### 使用Gitee安装
-
-```bash
-git clone --depth=1 https://gitee.com/memz-mapleleaf/memz-plugin.git ./plugins/memz-plugin/
-```
+#### ~~使用Gitee安装~~
 
 ### 安装依赖
 
