@@ -13,7 +13,8 @@ export class Updates extends plugin {
       rule: [
         {
           reg: /^#*(memz)(插件)?(强制)?更新$/i,
-          fnc: 'update'
+          fnc: 'update',
+          permission: 'master'
         },
         {
           reg: /^#*(memz)(插件)?更新(日志|记录)$/i,
@@ -56,7 +57,6 @@ export class Updates extends plugin {
   }
 
   async update (e) {
-    if (!e.isMaster || e.user_id !== 1011303349) { return e.reply('您无权限执行此操作。') }
     if (e.at && !e.atme) return
     e.msg = `#${e.msg.includes('强制') ? '强制' : ''}更新${PluginName}`
     const up = new Update(e)
