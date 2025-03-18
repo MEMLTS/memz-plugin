@@ -24,21 +24,6 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 const appsDir = path.join(__dirname, 'apps')
 
-// 添加web目录路径常量
-const webDir = path.join(__dirname, 'web')
-
-// 确保web目录存在
-try {
-  await fs.access(webDir)
-} catch (error) {
-  if (error.code === 'ENOENT') {
-    await fs.mkdir(webDir, { recursive: true })
-    await fs.mkdir(path.join(webDir, 'html'), { recursive: true })
-    await fs.mkdir(path.join(webDir, 'css'), { recursive: true })
-    logger.info(chalk.green('[memz-plugin] 创建web目录结构'))
-  }
-}
-
 // 彩色分隔线
 const colors = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
 const coloredDashes = Array.from({ length: 23 }, () => {
