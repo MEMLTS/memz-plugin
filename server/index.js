@@ -14,7 +14,8 @@ import Config from '../components/Config.js'
 import { RedisConfig } from '../components/Redis.js'
 import { generateMarkdownDocs, clearApiDocsCache } from './model/apiDocs.js'
 import chokidar from 'chokidar'
-import setupDebugRoutes from './tools/route-debugger.js'
+// 本地调试函数，471行使用
+// import setupDebugRoutes from './tools/route-debugger.js'
 
 // 导入前端页面处理函数
 import { web } from './web/index.js'
