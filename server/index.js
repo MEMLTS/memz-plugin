@@ -466,8 +466,8 @@ export async function startServer () {
       }
     })
 
-    // 设置调试路由
-    setupDebugRoutes(app)
+    // 设置调试路由,非本地调试不建议使用
+    // setupDebugRoutes(app)
 
     // API路由器挂载 - 确保在加载API前挂载
     app.use('/api', apiRouter)
