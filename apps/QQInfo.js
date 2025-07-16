@@ -1,6 +1,6 @@
 import Render from '../components/Render.js'
 
-export class WebTools extends plugin {
+export class QQInfo extends plugin {
     constructor() {
         super({
             name: 'QQInfo',
@@ -9,7 +9,7 @@ export class WebTools extends plugin {
             priority: -1,
             rule: [
                 {
-                    reg: '^#?qqinfo\\s*(.+)',  // 匹配QQ信息查询命令
+                    reg: /^#?(qq信息查询|qq信息|qqinfo)\s*/i,
                     fnc: 'qqinfo'
                 }
             ]
@@ -20,39 +20,40 @@ export class WebTools extends plugin {
         if (!memz.memz.qqInfo && !e.isMaster) {
             return logger.warn('[memz-plugin] QQInfo状态当前为仅主人可用')
         }
-        let qq
-        const qqMatch = e.msg.match(/#?qqinfo\s*(.+)/)
-        if (!qqMatch) {
-            if (e.at) {
-                qq = e.at
-            } else {
-                qq = e.user_id
-            }
+
+        let qq;
+        const qqMatch = e.msg.match(/^#?(qq信息查询|qq信息|qqinfo)\s*(\d+)?/i);
+        if (qqMatch && qqMatch[2]) {
+            qq = qqMatch[2].trim();
         } else {
-            qq = qqMatch[1].trim()
+            qq = e.at ? e.at : e.user_id;
         }
 
         try {
-            const response = await fetch(`https://mapi.141941.xyz/api/qq/info/info?qq=${qq}`)
-            if (!response.ok) {
-                throw new Error(`查询失败，服务器返回状态码：${response.status}`)
+            if (!/^\d+$/.test(qq)) {
+                throw new Error('无效的QQ号格式');
             }
 
-            const renderData = await response.json()
+            const response = await fetch(`https://mapi.141941.xyz/api/qq/info/info?qq=${qq}`);
+            if (!response.ok) {
+                throw new Error(`查询失败，服务器返回状态码：${response.status}`);
+            }
+
+            const renderData = await response.json();
 
             if (!renderData || renderData.code !== 0) {
-                throw new Error(`查询失败，原因: ${renderData.message || '未知错误'}`)
+                throw new Error(`查询失败，原因: ${renderData.message || '未知错误'}`);
             }
+
             const image = await Render.render('html/qqinfo/index.html', renderData, {
                 e,
                 retType: 'base64'
-            })
+            });
 
-            await e.reply(image, true)
-
+            await e.reply(image, true);
         } catch (error) {
-            logger.error(`[memz-plugin] QQInfo查询失败: ${error.message}`)
-            await e.reply(`查询失败，原因: ${error.message}`, true)
+            logger.error(`[memz-plugin] QQInfo查询失败: ${error.message}`);
+            await e.reply(`查询失败，原因: ${error.message}`, true);
         }
     }
 }
