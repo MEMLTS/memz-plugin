@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title || 'QQ信息查询'}}</title>
+    <link rel="stylesheet" type="text/css" href="{{_res_path}}/html/qqinfo/index.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 背景装饰元素 -->
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
+    <div class="bg-circle circle-3"></div>
+    
+    <div class="container">
+        <header>
+            <h1><i class="fab fa-qq"></i> QQ信息查询</h1>
+            <p>以下信息查询于 <span id="query-time">{{time}}</span></p>
+        </header>
+        
+        <div class="card">
+            <div class="profile-header">
+                <div class="avatar-container">
+                    <img src="{{data.avatar}}" alt="用户头像" class="avatar">
+                    <div class="status-badge {{if data.status.msg == '在线'}}online{{else}}offline{{/if}}">
+                        <i class="fas fa-circle"></i>
+                    </div>
+                </div>
+                <div class="user-info">
+                    <h2>{{data.nickname || '未知用户'}}</h2>
+                    <div class="qid">QID：{{data.qid || '未设置'}}</div>
+                    <div class="signature">{{data.sign || '未设置'}}</div>
+                </div>
+            </div>
+            
+            <div class="profile-details">
+                <div class="info-group">
+                    <h3><i class="fas fa-user-circle"></i> 基本信息</h3>
+                    <div class="info-item">
+                        <div class="info-label">QQ号码：</div>
+                        <div class="info-value highlight"><i class="fas fa-hashtag"></i>{{data.qq}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">性别：</div>
+                        <div class="info-value"><i class="fas fa-venus-mars"></i>{{data.gender || '未公开'}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">生日：</div>
+                        <div class="info-value"><i class="fas fa-birthday-cake"></i>{{data.birthday || '未设置/未公开'}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">手机号：</div>
+                        <div class="info-value"><i class="fas fa-mobile-alt"></i>{{data.phone || '-'}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">学校：</div>
+                        <div class="info-value"><i class="fas fa-graduation-cap"></i>{{if data.school}}{{data.school}}{{else}}未设置{{/if}}</div>
+                    </div>
+                </div>
+                
+                <div class="info-group">
+                    <h3><i class="fas fa-info-circle"></i> 其他信息</h3>
+                    <div class="info-item">
+                        <div class="info-label">地区：</div>
+                        <div class="info-value"><i class="fas fa-map-marker-alt"></i>{{if data.province}}{{data.province}}{{/if}} {{if data.city}}{{data.city}}{{/if}} {{if !data.province}}未设置{{/if}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">注册日期：</div>
+                        <div class="info-value"><i class="fas fa-calendar-alt"></i>{{data.registrationDate || '未知'}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">年龄：</div>
+                        <div class="info-value"><i class="fas fa-user-clock"></i>{{data.age || '未知'}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">在线状态：</div>
+                        <div class="info-value"><i class="fas fa-circle {{if data.status.msg == '在线'}}online{{else}}offline{{/if}}"></i>{{data.status.msg || '未知状态'}}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">QQ等级：</div>
+                        <div class="info-value">
+                            <div><i class="fas fa-chart-line"></i>{{data.level || 0}}级</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="business-section">
+                <div class="section-title">
+                    <i class="fas fa-crown"></i>
+                    <h3>业务与特权</h3>
+                </div>
+                <div class="business-grid">
+                    {{each data.business item}}
+                    <div class="business-item">
+                        <div class="business-icon">
+                            <img src="{{item.icon}}" alt="业务图标">
+                        </div>
+                        <div class="business-name">{{item.name || '未知业务'}}</div>
+                        <div class="business-level">等级: {{item.level || '未设置'}}</div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            {{@copyright || 'Copyright © MEMZ-Plugin - MapleLeaf'}}
+        </div>
+    </div>
+</body>
+</html>

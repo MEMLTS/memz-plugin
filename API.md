@@ -65,6 +65,13 @@ MEMZ-Plugin 提供了一系列 HTTP API 接口。所有接口均返回 JSON 格�
   - `qq`: QQ号码
 - 说明: QQ注册时间查询
 
+#### QQ信息查询
+- 接口: `/qq/info/info`
+- 方法: `GET`
+- 参数:
+  - `qq`: QQ号
+- 说明: QQ信息查询
+
 #### QQ音乐分享卡片
 - 接口: `/qq/info/music`
 - 方法: `POST`

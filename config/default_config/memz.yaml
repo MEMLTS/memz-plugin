@@ -27,6 +27,8 @@ nohelpMasterText: "主人~我救不了你啊！"
 atalltext: "不🈷️"
 # 艾特全体分片
 atChunkSize: 40
+# QQInfo 查询
+qqInfo: true
 
 ### 工具设置
 # 是否所有人可用Whois
