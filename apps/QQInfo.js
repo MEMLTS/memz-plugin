@@ -33,7 +33,7 @@ export class WebTools extends plugin {
         }
 
         try {
-            const response = await fetch(`http://192.168.1.97:1941/api/qq/info/info?qq=${qq}`)
+            const response = await fetch(`https://mapi.141941.xyz/api/qq/info/info?qq=${qq}`)
             if (!response.ok) {
                 throw new Error(`查询失败，服务器返回状态码：${response.status}`)
             }
