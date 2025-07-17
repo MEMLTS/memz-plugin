@@ -1,117 +1,263 @@
-.container { 
-  width: 100%;
-  padding: 20px;
-  background-color: #f5f5f5;
-}
+    /* 基础样式重置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    }
 
-.redis-info {
-  background: #fff;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  max-width: 1400px; /* 增加页面宽度 */
-  margin: 0 auto;
-}
+    body {
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      color: #e0e0e0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      line-height: 1.6;
+    }
 
-.header {
-  font-size: 32px;
-  font-weight: bold;
-  text-align: center;
-  margin-bottom: 30px;
-  background-image: linear-gradient(271.14deg, #001bff 0.98%, #00f0ff 15.79%, #fce84a 37.33%, #f34628 55.77%, #b275ff 72.4%, #a50cdd 91.4%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  padding: 10px 0;
-}
+    .container {
+      width: 100%;
+      max-width: 900px;
+    }
 
-.subtitle {
-  font-size: 24px;
-  font-weight: bold;
-  margin: 20px 0;
-  color: #333;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 10px;
-}
+    /* Redis信息卡片 */
+    .redis-info {
+      background: rgba(16, 22, 36, 0.85);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(64, 102, 155, 0.3);
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
 
-.stats, .db-stats {
-  margin: 20px 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
-  align-items: center;
-}
+    .redis-info::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #d82c20, #ff6b6b);
+    }
 
-.stats div, .db-stats div {
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 12px 20px;
-  border-radius: 8px;
-  background: #f8f9fa;
-  border: 1px solid #eee;
-  margin-right: 10px;
-  min-width: 200px;
-}
+    /* 头部样式 */
+    .header {
+      background: rgba(216, 44, 32, 0.1);
+      padding: 25px 30px;
+      text-align: center;
+      position: relative;
+      border-bottom: 1px solid rgba(64, 102, 155, 0.2);
+    }
 
-.stats div:hover, .db-stats div:hover {
-  background: #f0f2f5;
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
+    .header::after {
+      content: '⚡';
+      position: absolute;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: #ff6b6b;
+      animation: pulse 2s infinite;
+    }
 
-.stats div span, .db-stats div span {
-  color: #444;
-  margin-right: 15px;
-  min-width: 300px;
-  font-size: 16px;
-}
+    .header div {
+      font-size: 2.2rem;
+      color: #fff;
+      text-shadow: 0 0 15px rgba(255, 107, 107, 0.7);
+      letter-spacing: 1px;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-.stats div span + span, 
-.db-stats div span + span {
-  font-weight: normal;
-  color: #333;
-  flex: 1;
-}
+    /* 统计信息样式 */
+    .stats {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      border-bottom: 1px solid rgba(64, 102, 155, 0.2);
+    }
 
-/* 新增调整右对齐 */
-.stats div {
-  display: flex;
-  justify-content: flex-start;
-}
+    .stats>div {
+      display: flex;
+      justify-content: space-between;
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(64, 102, 155, 0.1);
+    }
 
-.db-stats {
-  text-align: left;
-}
+    .stats>div:hover {
+      background: rgba(77, 171, 247, 0.1);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
 
-.db-stats div {
-  white-space: nowrap; /* 防止换行 */
-}
+    .stats span:first-child {
+      color: #a0aec0;
+      font-weight: 500;
+    }
 
-/* 响应式布局 */
-@media screen and (max-width: 1700px) {
-  .stats, .db-stats {
-    grid-template-columns: 1fr;
-  }
+    .stats span:last-child {
+      color: #4dabf7;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
 
-  .redis-info {
-    max-width: 95%;
-  }
-}
+    /* 数据库统计区域 */
+    .db-stats {
+      padding: 30px;
+    }
 
-@media screen and (max-width: 768px) {
-  .container {
-    padding: 10px;
-  }
-  
-  .redis-info {
-    padding: 15px;
-  }
+    .subtitle {
+      font-size: 1.4rem;
+      margin-bottom: 25px;
+      color: #63e6be;
+      position: relative;
+      padding-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
 
-  .stats div, .db-stats div {
-    padding: 8px;
-  }
+    .subtitle::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 120px;
+      height: 3px;
+      background: linear-gradient(90deg, #63e6be, transparent);
+      border-radius: 3px;
+    }
 
-  .stats div span, .db-stats div span {
-    min-width: 150px;
-    font-size: 14px;
-  }
-}
+    /* 数据库项样式 */
+    .db-item {
+      background: rgba(38, 48, 83, 0.6);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 15px;
+      border: 1px solid rgba(86, 104, 186, 0.3);
+    }
+
+    .db-item-title {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #63e6be;
+      display: flex;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .db-item-title::before {
+      content: 'DB';
+      display: inline-block;
+      background: #63e6be;
+      color: #0c1e28;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 2px 10px;
+      border-radius: 20px;
+      margin-right: 10px;
+    }
+
+    .db-stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+    }
+
+    .db-stat-row:nth-child(even) {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 4px;
+    }
+
+    .db-stat-label {
+      color: #a0aec0;
+      padding-left: 10px;
+    }
+
+    .db-stat-value {
+      color: #ffd43b;
+      font-weight: 600;
+      padding-right: 10px;
+    }
+
+    /* 分布信息样式 */
+    .distrib-section {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+
+    .distrib-title {
+      color: #ff9a9e;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .distrib-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .distrib-item {
+      background: rgba(255, 154, 158, 0.1);
+      border: 1px solid rgba(255, 154, 158, 0.2);
+      border-radius: 6px;
+      padding: 5px 10px;
+      font-size: 0.9rem;
+    }
+
+    .distrib-key {
+      color: #ff9a9e;
+    }
+
+    .distrib-value {
+      color: #ffd43b;
+      margin-left: 5px;
+    }
+
+    /* 页脚样式 */
+    .footer {
+      padding: 25px 30px;
+      text-align: center;
+      color: rgba(160, 174, 192, 0.7);
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-top: 1px solid rgba(64, 102, 155, 0.2);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .header div {
+        font-size: 1.8rem;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+      }
+    }
