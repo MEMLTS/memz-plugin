@@ -104,6 +104,15 @@ export default [
     component: 'Switch'
   },
   {
+    field: 'memz.AutoLikeCron',
+    label: '自动点赞Cron',
+    bottomHelpMessage: '自动点赞Cron表达式',
+    component: 'EasyCron',
+    componentProps: {
+      placeholder: '请输入Cron表达式'
+    }
+  },
+  {
     field: 'memz.AutoLikeList',
     label: '自动点赞列表',
     bottomHelpMessage: '填入QQ号,主人默认在点赞列表,无需添加',

@@ -32,7 +32,7 @@ export class 自动点赞 extends plugin {
     })
     this.task = [
       {
-        cron: '0 0 0 * * ?',
+        cron: normalizeCronExpression(memz.memz.AutoLikeCron),
         name: '赞',
         fnc: () => this.ThumbUp()
       }
@@ -86,7 +86,7 @@ export class 自动点赞 extends plugin {
       logger.warn('[memz-plugin] 未指定QQ号')
     }
   }
-  
+
   async ThumbUp() {
     const { AutoLike, AutoLikeList } = memz.memz
 

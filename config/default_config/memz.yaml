@@ -13,6 +13,8 @@ kallChromeEnabled: false
 kallChromeCron: "0 0 0,12,7,19 * * ?"
 # 自动点赞 主人默认在点赞名单
 AutoLike: true
+# 自动点赞Cron
+AutoLikeCron: "0 0 0 * * ?"
 # 自动点赞列表
 AutoLikeList: []
 # 谁艾特我保留时长(小时)
