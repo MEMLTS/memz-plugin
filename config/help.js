@@ -236,6 +236,16 @@ export const qqHelpList = [
         icon: 67,
         title: '#查Q龄',
         desc: '查询QQ注册时间'
+      },
+      {
+        icon: 68,
+        title: '#一键点赞',
+        desc: '批量开始点赞任务'
+      },
+      {
+        icon: 69,
+        title: '#(添加|删除)点赞+QQ',
+        desc: '添加或删除点赞列表中的QQ号'
       }
     ]
   }
