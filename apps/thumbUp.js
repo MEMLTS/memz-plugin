@@ -141,17 +141,17 @@ export class 自动点赞 extends plugin {
       logger.info(`[memz-plugin] 开始处理 QQ：${uin}`)
       for (const i of Users) {
         try {
-          // 好友
-          if (await Bot[uin].fl.has(i)) {
-            Bot[uin].pickFriend(i).thumbUp(20)
-            logger.info(`[memz-plugin] 为 ${uin} 的好友 ${i} 点赞 20 下`)
-            await this.sleep(2000)
+          const isFriend = await Bot[uin].fl.has(i)
+          const likeCount = isFriend ? 20 : 50
+          
+          if (isFriend) {
+            await Bot[uin].pickFriend(i).thumbUp(likeCount)
           } else {
-            // 非好友
-            Bot[uin].pickUser(i).thumbUp(50)
-            logger.info(`[memz-plugin] 为 ${uin} 的非好友 ${i} 点赞 50 下`)
-            await this.sleep(2000)
+            await Bot[uin].pickUser(i).thumbUp(likeCount)
           }
+          
+          logger.info(`[memz-plugin] ${uin} 为${isFriend ? '好友' : '非好友'} ${i} 点赞 ${likeCount} 下`)
+          await this.sleep(2000)
         } catch (error) {
           logger.error(`[memz-plugin] 为 ${uin} 的 ${i} 点赞时发生错误：${error}`)
         }
