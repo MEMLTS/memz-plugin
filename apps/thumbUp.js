@@ -57,6 +57,7 @@ export class 自动点赞 extends plugin {
       const qq = qqMatch[3].trim()
       if (memz.memz.AutoLikeList.includes(qq)) {
         logger.warn('[memz-plugin] QQ号已存在')
+        e.reply('QQ号已存在辣！',true)
       }
       else {
         memz.memz.AutoLikeList.push(qq)
