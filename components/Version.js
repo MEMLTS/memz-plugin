@@ -16,7 +16,7 @@ const pluginPackageJson = readJsonFile(path.join(PluginPath, 'package.json'))
 const Version = {
   isMiao: Boolean(packageJson?.dependencies?.sequelize),
   isMangoCat: packageJson?.name === 'MangoCat-Yunzai',
-  isTrss: typeof Bot !== 'undefined' && Array.isArray(Bot.uin),
+  isTrss: typeof Bot !== 'undefined' && Array.isArray(Bot.uin) && packageJson?.name !== 'MangoCat-Yunzai',
   get latestVersion () {
     return pluginPackageJson?.version || null
   },
