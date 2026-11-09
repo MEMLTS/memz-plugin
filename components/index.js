@@ -15,9 +15,11 @@ const { apiby } = Config.getConfig('api')
 const copyright = `Copyright © 2024-${new Date().getFullYear()} ${MEMZ_NAME} - ${apiby}`
 const BotName = Version.isTrss
   ? 'Trss-Yunzai'
-  : Version.isMiao
-    ? 'Miao-Yunzai'
-    : 'Yunzai-Bot'
+  : Version.isMangoCat
+    ? 'MangoCat-Yunzai'
+    : Version.isMiao
+      ? 'Miao-Yunzai'
+      : 'Yunzai-Bot'
 export {
   isFramework,
   Version,
